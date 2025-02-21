@@ -12,7 +12,7 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String nombre_completo;
+    private String nombre;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reserva> reservas;
@@ -21,9 +21,9 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(Integer id, String nombre_completo) {
+    public Usuario(Integer id, String nombre) {
         this.id = id;
-        this.nombre_completo = nombre_completo;
+        this.nombre = nombre;
     }
 
     public Integer getId() {
@@ -34,19 +34,19 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getNombre_completo() {
-        return nombre_completo;
+    public String getnombre() {
+        return nombre;
     }
 
-    public void setNombre_completo(String nombre_completo) {
-        this.nombre_completo = nombre_completo;
+    public void setnombre(String nombre) {
+        this.nombre = nombre;
     }
 
     @Override
     public String toString() {
         return "Usuario{" +
                 "id=" + id +
-                ", nombre_completo='" + nombre_completo + '\'' +
+                ", nombre='" + nombre + '\'' +
                 '}';
     }
 }

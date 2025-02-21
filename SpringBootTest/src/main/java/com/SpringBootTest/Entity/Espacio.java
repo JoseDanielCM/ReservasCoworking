@@ -14,9 +14,10 @@ public class Espacio {
     private Integer id;
 
     private String nombre;
+    @Enumerated(EnumType.STRING)
     private Tipo tipo;
     private Integer capacidad;
-    private Boolean es_disponible;
+    private Boolean disponible;
 
     @OneToMany(mappedBy = "espacio", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reserva> reservas;
@@ -28,7 +29,7 @@ public class Espacio {
         this.nombre = nombre;
         this.tipo = tipo;
         this.capacidad = capacidad;
-        this.es_disponible = es_disponible;
+        this.disponible = es_disponible;
     }
 
     public Integer getId() {
@@ -64,11 +65,11 @@ public class Espacio {
     }
 
     public Boolean getEs_disponible() {
-        return es_disponible;
+        return disponible;
     }
 
     public void setEs_disponible(Boolean es_disponible) {
-        this.es_disponible = es_disponible;
+        this.disponible = es_disponible;
     }
 
     @Override
@@ -78,7 +79,7 @@ public class Espacio {
                 ", nombre='" + nombre + '\'' +
                 ", tipo=" + tipo +
                 ", capacidad=" + capacidad +
-                ", es_disponible=" + es_disponible +
+                ", es_disponible=" + disponible +
                 '}';
     }
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -16,8 +17,8 @@ public class Horario {
 
     private LocalDate fecha;
 
-    private LocalDateTime hora_inicio;
-    private LocalDateTime hora_final;
+    private LocalTime hora_inicio;
+    private LocalTime hora_final;
 
     @OneToMany(mappedBy = "horario")
     private List<Reserva> reservas;
@@ -25,11 +26,12 @@ public class Horario {
     public Horario() {
     }
 
-    public Horario(Integer id, LocalDate fecha, LocalDateTime hora_inicio, LocalDateTime hora_final) {
+    public Horario(Integer id, LocalDate fecha, LocalTime hora_inicio, LocalTime hora_final, List<Reserva> reservas) {
         this.id = id;
         this.fecha = fecha;
         this.hora_inicio = hora_inicio;
         this.hora_final = hora_final;
+        this.reservas = reservas;
     }
 
     public Integer getId() {
@@ -48,20 +50,28 @@ public class Horario {
         this.fecha = fecha;
     }
 
-    public LocalDateTime getHora_inicio() {
+    public LocalTime getHora_inicio() {
         return hora_inicio;
     }
 
-    public void setHora_inicio(LocalDateTime hora_inicio) {
+    public void setHora_inicio(LocalTime hora_inicio) {
         this.hora_inicio = hora_inicio;
     }
 
-    public LocalDateTime getHora_final() {
+    public LocalTime getHora_final() {
         return hora_final;
     }
 
-    public void setHora_final(LocalDateTime hora_final) {
+    public void setHora_final(LocalTime hora_final) {
         this.hora_final = hora_final;
+    }
+
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
     }
 
     @Override

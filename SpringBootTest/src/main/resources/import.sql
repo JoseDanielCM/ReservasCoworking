@@ -1,0 +1,7 @@
+INSERT into usuarios (nombre) VALUES ('Jose Daniel'),('Laura Sofia'),('Juan Perez'),('Maria Lopez'),('Walter McGee'),('Travis Black'),('Harry Bradley'),('Dylan Walsh'),('Jay Bishop'),('Logan Ramos');    
+
+Insert into espacios (capacidad,disponible,nombre,tipo) VALUES  (15,true,'Sala Jaime Enrique','OFICINA_PRIVADA'), (22,false,'Sala Jayce','SALA_REUNIIONES'), (8,false,'Sala Caitlyn','ESCRITORIO_COMPARTIDO'), (17,false,'Sala Ekko','SALA_REUNIIONES'), (14,true,'Sala Jinx','OFICINA_PRIVADA'), (19,true,'Sala Victor','ESCRITORIO_COMPARTIDO'), (19,false,'Sala Warwick','OFICINA_PRIVADA'), (23,true,'Sala Silko','OFICINA_PRIVADA'), (23,false,'Sala Vander','ESCRITORIO_COMPARTIDO'), (16,true,'Sala Isha','OFICINA_PRIVADA');
+
+insert into horarios (fecha,hora_inicio,hora_final) VALUES ('4/1/2105','07:52:12','09:52:12'), ('5/11/2089','15:38:25','18:38:25'), ('2/16/2095','07:34:14','09:34:14'), ('9/23/2088','21:00:28','23:00:28'), ('4/17/2106','13:54:59','16:54:59'), ('7/4/2089','21:36:27','23:36:27'), ('10/9/2078','14:32:28','18:32:28'), ('5/11/2057','03:48:07','06:48:07'), ('6/23/2041','15:22:32','18:22:32'), ('8/21/2093','10:05:31','14:05:31');
+
+insert into reservas(estado,id_espacio,id_horario,id_usuario) VALUES ('CONFIRMADA',8,10,4), ('CONFIRMADA',9,3,3), ('PENDIENTE',4,3,6), ('PENDIENTE',10,7,3), ('CANCELADA',9,4,1), ('CANCELADA',1,7,1), ('CANCELADA',4,10,8), ('CONFIRMADA',6,4,6), ('PENDIENTE',10,9,7), ('PENDIENTE',3,3,6);

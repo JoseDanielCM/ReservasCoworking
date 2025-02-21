@@ -30,6 +30,7 @@ public class Reserva {
     private Horario horario;
     // esppacio
 
+    @Enumerated(EnumType.STRING)
     private Estado estado;
 
     public Reserva() {

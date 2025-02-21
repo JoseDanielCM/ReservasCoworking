@@ -20,7 +20,6 @@ public class Reserva {
     @JoinColumn(name = "id_espacio")
     private Espacio espacio;
 
-
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;

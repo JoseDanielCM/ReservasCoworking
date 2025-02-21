@@ -39,7 +39,6 @@ public class EspacioService implements IEspacioService {
         return espacioRepository.save(espacioExistente);
     };
 
-
     @Override
     public void eliminarEspacio(Integer id){
         Espacio espacioEliminar = espacioRepository.findById(id).orElseThrow(() -> new EspacioNotFoundException("Espacio no encontrado con id: " + id));
@@ -49,7 +48,6 @@ public class EspacioService implements IEspacioService {
     public List<Espacio> obtenerTodosLosEspacios(){
         return espacioRepository.findAll();
     };
-
     @Override
     public List<Espacio> obtenerEspacioTipo(String tipo){
         Tipo tipoEnum = Tipo.valueOf(tipo);

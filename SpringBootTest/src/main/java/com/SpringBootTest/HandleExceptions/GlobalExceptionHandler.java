@@ -1,5 +1,6 @@
 package com.SpringBootTest.HandleExceptions;
 
+import com.SpringBootTest.Exceptions.NoReservasActivasDeUsuario;
 import com.SpringBootTest.Exceptions.ReservaNotFoundException;
 import com.SpringBootTest.Exceptions.EspacioNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,14 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(EspacioNotFoundException.class)
     public ResponseEntity<Map<String, Object>> handleEspacioNotFoundException(EspacioNotFoundException e){
+        Map<String, Object> error = new HashMap<>();
+        error.put("error",e.getMessage());
+        error.put("status", HttpStatus.NOT_FOUND.value());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(NoReservasActivasDeUsuario.class)
+    public ResponseEntity<Map<String, Object>> handleNoreservasActivasUsuario(NoReservasActivasDeUsuario e){
         Map<String, Object> error = new HashMap<>();
         error.put("error",e.getMessage());
         error.put("status", HttpStatus.NOT_FOUND.value());

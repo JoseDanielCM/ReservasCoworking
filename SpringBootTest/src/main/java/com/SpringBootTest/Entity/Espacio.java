@@ -21,6 +21,7 @@ public class Espacio {
     private Boolean disponible;
 
     @OneToMany(mappedBy = "espacio", cascade = CascadeType.ALL, orphanRemoval = true)
+
     private List<Reserva> reservas;
 
     public Espacio() {

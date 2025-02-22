@@ -17,6 +17,11 @@ public class RutasController {
         return "espacios";
     }
 
+    @GetMapping("/vista/espaciosDisponibles")
+    public String espaciosDispoPage(){
+        return "Disponible";
+    }
+
     @GetMapping("/vista/crear")
     public String espacioCrear(){
         return "crearEspacio";

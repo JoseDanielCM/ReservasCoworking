@@ -105,36 +105,39 @@
         }
 
         const handleEdit = (id) => {
-            console.log(id);
-            
-            document.getElementById(`editFecha${id}`).innerHTML = `<input type="date" id="editFechaInput${id}" value="${document.getElementById(`editFecha${id}`).innerText}">`;
-            document.getElementById(`editHoraInicio${id}`).innerHTML = `<input type="time" id="editHoraInicioInput${id}" value="${document.getElementById(`editHoraInicio${id}`).innerText}">`;
-            document.getElementById(`editHoraFin${id}`).innerHTML = `<input type="time" id="editHoraFinInput${id}" value="${document.getElementById(`editHoraFin${id}`).innerText}">`;
-            
-            const editButton = document.getElementById(`editButton${id}`);
-            editButton.innerText = "Guardar";
-            editButton.setAttribute("onclick", `handleSave(${id})`);
-        }
+    console.log(id);
+    
+    document.getElementById(`editFecha${id}`).innerHTML = `<input type="date" id="editFechaInput${id}" value="${document.getElementById(`editFecha${id}`).innerText}">`;
+    document.getElementById(`editHoraInicio${id}`).innerHTML = `<input type="time" id="editHoraInicioInput${id}" value="${document.getElementById(`editHoraInicio${id}`).innerText}">`;
+    document.getElementById(`editHoraFin${id}`).innerHTML = `<input type="time" id="editHoraFinInput${id}" value="${document.getElementById(`editHoraFin${id}`).innerText}">`;
+    
+    const editButton = document.getElementById(`editButton${id}`);
+    editButton.innerText = "Guardar";
+    editButton.setAttribute("onclick", `handleSave(${id})`);
+}
 
-        const handleSave = async (id) => {
-            console.log(id);
-            const fecha = document.getElementById(`editFechaInput${id}`).value;
-            const horaInicio = document.getElementById(`editHoraInicioInput${id}`).value;
-            const horaFin = document.getElementById(`editHoraFinInput${id}`).value;
+const handleSave = async (id) => {
+    console.log(id);
+    const fecha = document.getElementById(`editFechaInput${id}`).value;
+    const horaInicio = document.getElementById(`editHoraInicioInput${id}`).value;
+    const horaFin = document.getElementById(`editHoraFinInput${id}`).value;
 
-            await fetch(`http://localhost:8081/api/reservas/actualizar/${id}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    fecha: fecha,
-                    hora_inicio: horaInicio,
-                    hora_final:  horaFin
-                })
-            });
-            getReservas();
-        }
+    await fetch(`http://localhost:8081/api/reservas/actualizar/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            fecha: fecha,
+            hora_inicio: horaInicio,
+            hora_final:  horaFin
+        })
+    });
+    
+    document.getElementById("tablaReservas").innerHTML = "";
+    getReservas();
+}
+
         
     </script>
 </body>

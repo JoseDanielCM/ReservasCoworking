@@ -1,4 +1,5 @@
 package com.SpringBootTest.Controller;
+import com.SpringBootTest.DTO.ReservaDTO;
 import com.SpringBootTest.Entity.Espacio;
 import com.SpringBootTest.Entity.Horario;
 import com.SpringBootTest.Entity.Reserva;
@@ -17,12 +18,12 @@ public class ReservaController {
     ReservaService reservaService;
 
     @GetMapping("/getAll/{id}")
-    public ResponseEntity<List<Reserva>> obtenerReservasUsuario(@PathVariable Integer id) {
+    public ResponseEntity<List<ReservaDTO>> obtenerReservasUsuario(@PathVariable Integer id) {
         List<Reserva> listaReservas = reservaService.obtenerReservaPorUsuario(id);
-        System.out.println("************************************");
-        System.out.println(listaReservas);
-        return ResponseEntity.ok(listaReservas);
+        List<ReservaDTO> reservaDTOs = listaReservas.stream().map(ReservaDTO::new).toList();
+        return ResponseEntity.ok(reservaDTOs);
     }
+
 
     @GetMapping("/activas/{id}")
     public ResponseEntity<List<Reserva>> obtenerReservasUsuarioActivas(@PathVariable Integer id) {
@@ -30,14 +31,14 @@ public class ReservaController {
     }
 
 
-    @DeleteMapping("/actualizar/{id}")
+    @PatchMapping("/actualizar/{id}")
     public void eliminarReserva(@PathVariable Integer id, @RequestBody Horario horario) {
         reservaService.actualizarReserva(id, horario);
     }
 
-    @PatchMapping("/eliminar/{id}")
-    public void eliminarReserva(@PathVariable Integer idReserva) {
-        reservaService.eliminarReserva(idReserva);
+    @DeleteMapping("/eliminar/{id}")
+    public void eliminarReserva(@PathVariable Integer id) {
+        reservaService.eliminarReserva(id);
     }
 
     @PostMapping("/crear")

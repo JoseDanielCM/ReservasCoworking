@@ -48,9 +48,7 @@ public class ReservaService implements IReservaService {
     @Override
     public List<Reserva> obtenerReservaPorUsuario(Integer idUsuario) {
         Usuario usuario = usuarioRepository.findById(idUsuario).orElseThrow(null);
-        System.out.println(usuario);
         List<Reserva> lista = reservaRepository.findByUsuario(usuario);
-        System.out.println(lista);
         return lista;
     }
 

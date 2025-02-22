@@ -1,5 +1,7 @@
 package com.SpringBootTest.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -16,6 +18,7 @@ public class Usuario {
     private String nombre;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
     private List<Reserva> reservas;
 
 
@@ -44,4 +47,12 @@ public class Usuario {
     }
 
 
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", reservas=" + reservas +
+                '}';
+    }
 }

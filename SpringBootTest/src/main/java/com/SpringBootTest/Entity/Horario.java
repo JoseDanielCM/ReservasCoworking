@@ -1,5 +1,6 @@
 package com.SpringBootTest.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -22,17 +23,17 @@ public class Horario {
     private LocalTime hora_final;
 
     @OneToMany(mappedBy = "horario")
+    @JsonBackReference
     private List<Reserva> reservas;
 
     public Horario() {
     }
 
-    public Horario(Integer id, LocalDate fecha, LocalTime hora_inicio, LocalTime hora_final, List<Reserva> reservas) {
+    public Horario(Integer id, LocalDate fecha, LocalTime hora_inicio, LocalTime hora_final) {
         this.id = id;
         this.fecha = fecha;
         this.hora_inicio = hora_inicio;
         this.hora_final = hora_final;
-        this.reservas = reservas;
     }
 
     public Integer getId() {
@@ -76,4 +77,14 @@ public class Horario {
     }
 
 
+    @Override
+    public String toString() {
+        return "Horario{" +
+                "id=" + id +
+                ", fecha=" + fecha +
+                ", hora_inicio=" + hora_inicio +
+                ", hora_final=" + hora_final +
+                ", reservas=" + reservas +
+                '}';
+    }
 }

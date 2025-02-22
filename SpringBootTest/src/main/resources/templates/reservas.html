@@ -24,6 +24,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/espacios">Ver Espacios</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/espacios">Crear Reserva</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -39,7 +42,10 @@
                 <thead class="table-dark text-center">
                     <tr>
                         <th scope="col">Id</th>
-                        <th scope="col">Nombre</th>
+                        <th scope="col">Nombre Espacio</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Hora inicio</th>
+                        <th scope="col">Hora fin</th>
                         <th scope="col">Opciones</th>
                     </tr>
                 </thead>
@@ -52,45 +58,84 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+
+    </script>
 
     <script>
-
-        const getAllUsers = async () => {
+        const getReservas = async () => {
             const path = window.location.pathname;
             const parts = path.split('/');
 
             const userId = parts[parts.length - 1];
             console.log(userId);
             const response = await fetch(`http://localhost:8081/api/reservas/getAll/${userId}`);
-            console.log(response.text());
             
             const data = await response.json();
 
-            console.log(data);
             const tabla = document.getElementById("tablaReservas");
 
             data.forEach(reserva => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
                     <th scope="row">${reserva.id}</th>
-                    <td>${reserva.espacio.nombre}</td>
+                    <td>${reserva.nombreEspacio}</td>
+                    <td id="editFecha${reserva.id}">${reserva.fecha}</td>
+                    <td id="editHoraInicio${reserva.id}">${reserva.horaInicio}</td>
+                    <td id="editHoraFin${reserva.id}">${reserva.horaFin}</td>
                     <td class="text-center">
-                    <div class="container">
-                        <a href="http://localhost:8081/vista/users/${reserva.id}"
-                           class="btn btn-primary btn-sm me-3">Ver Usuario</a>
-                    </div>
+                        <div class="container">
+                        <a id="editButton${reserva.id}" onclick="handleEdit(${reserva.id})" class="btn btn-warning btn-sm me-3">Editar</a>
+                        <a onclick="handleDelete(${reserva.id})" class="btn btn-danger btn-sm">Eliminar</a>
+                        </div>
                     </td>
                 `;
                 tabla.appendChild(row);
             });
-            
+        }
+        getReservas();
 
+        const handleDelete = async (id) => {
+            console.log(id);
+            const response = await fetch(`http://localhost:8081/api/reservas/eliminar/${id}`, {
+                method: 'DELETE'
+            });
+            document.getElementById("tablaReservas").innerHTML = "";
+            getReservas();
         }
 
-        getAllUsers();
+        const handleEdit = (id) => {
+            console.log(id);
+            
+            document.getElementById(`editFecha${id}`).innerHTML = `<input type="date" id="editFechaInput${id}" value="${document.getElementById(`editFecha${id}`).innerText}">`;
+            document.getElementById(`editHoraInicio${id}`).innerHTML = `<input type="time" id="editHoraInicioInput${id}" value="${document.getElementById(`editHoraInicio${id}`).innerText}">`;
+            document.getElementById(`editHoraFin${id}`).innerHTML = `<input type="time" id="editHoraFinInput${id}" value="${document.getElementById(`editHoraFin${id}`).innerText}">`;
+            
+            const editButton = document.getElementById(`editButton${id}`);
+            editButton.innerText = "Guardar";
+            editButton.setAttribute("onclick", `handleSave(${id})`);
+        }
 
+        const handleSave = async (id) => {
+            console.log(id);
+            const fecha = document.getElementById(`editFechaInput${id}`).value;
+            const horaInicio = document.getElementById(`editHoraInicioInput${id}`).value;
+            const horaFin = document.getElementById(`editHoraFinInput${id}`).value;
 
+            await fetch(`http://localhost:8081/api/reservas/actualizar/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    fecha: fecha,
+                    hora_inicio: horaInicio,
+                    hora_final:  horaFin
+                })
+            });
+            getReservas();
+        }
+        
     </script>
-
+</body>
 </html>

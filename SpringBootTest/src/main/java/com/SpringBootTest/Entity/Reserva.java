@@ -21,14 +21,17 @@ public class Reserva {
     // user
     @ManyToOne
     @JoinColumn(name = "id_espacio")
+    @JsonManagedReference
     private Espacio espacio;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
+    @JsonManagedReference
     private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "id_horario")
+    @JsonManagedReference
     private Horario horario;
     // esppacio
 
@@ -87,5 +90,14 @@ public class Reserva {
     }
 
 
-
+    @Override
+    public String toString() {
+        return "Reserva{" +
+                "id=" + id +
+                ", espacio=" + espacio +
+                ", usuario=" + usuario +
+                ", horario=" + horario +
+                ", estado=" + estado +
+                '}';
+    }
 }

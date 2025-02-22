@@ -32,4 +32,4 @@ Antes de comenzar, asegúrate de tener lo siguiente instalado:
 
 A continuación, se muestra el diagrama relacional de la base de datos, que muestra las relaciones entre las entidades:
 
-<img src= "/ERDiagramCoworkers.png">
+<img src= "./ERDiagramCoworkers.png">

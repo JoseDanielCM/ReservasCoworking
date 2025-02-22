@@ -19,6 +19,7 @@ public class EspacioController {
 // CREATE
     @PostMapping("/crear")
     public ResponseEntity<Espacio> crearEspacio(@RequestBody Espacio espacio){
+        System.out.println(espacio);
         return ResponseEntity.ok(espacioService.CrearEspacio(espacio));
     }
 
@@ -41,6 +42,7 @@ public class EspacioController {
 // UPDATE
     @PatchMapping("/actualizar/{id}")
     public ResponseEntity<Espacio> actualizarEspacio(@PathVariable Integer id, @RequestBody Espacio espacio){
+        System.out.println(espacio);
         return ResponseEntity.ok(espacioService.actualizarEspacio(id, espacio));
     }
 

@@ -1,5 +1,6 @@
 package com.SpringBootTest.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -74,13 +75,5 @@ public class Horario {
         this.reservas = reservas;
     }
 
-    @Override
-    public String toString() {
-        return "Horario{" +
-                "id=" + id +
-                ", fecha=" + fecha +
-                ", hora_inicio=" + hora_inicio +
-                ", hora_final=" + hora_final +
-                '}';
-    }
+
 }

@@ -1,6 +1,7 @@
 package com.SpringBootTest.Entity;
 
 import com.SpringBootTest.DTO.Tipo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -21,15 +22,17 @@ public class Espacio {
 
     @OneToMany(mappedBy = "espacio", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reserva> reservas;
+
     public Espacio() {
     }
 
-    public Espacio(Integer id, String nombre, Tipo tipo, Integer capacidad, Boolean es_disponible) {
+    public Espacio(Integer id, String nombre, Tipo tipo, Integer capacidad, Boolean disponible) {
         this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
         this.capacidad = capacidad;
-        this.disponible = es_disponible;
+        this.disponible = disponible;
+        this.reservas = reservas;
     }
 
     public Integer getId() {
@@ -64,22 +67,14 @@ public class Espacio {
         this.capacidad = capacidad;
     }
 
-    public Boolean getEs_disponible() {
+    public Boolean getDisponible() {
         return disponible;
     }
 
-    public void setEs_disponible(Boolean es_disponible) {
-        this.disponible = es_disponible;
+    public void setDisponible(Boolean disponible) {
+        this.disponible = disponible;
     }
 
-    @Override
-    public String toString() {
-        return "Espacio{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", tipo=" + tipo +
-                ", capacidad=" + capacidad +
-                ", es_disponible=" + disponible +
-                '}';
-    }
+
+
 }

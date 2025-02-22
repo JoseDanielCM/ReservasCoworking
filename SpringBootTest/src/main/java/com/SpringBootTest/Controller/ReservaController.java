@@ -18,7 +18,10 @@ public class ReservaController {
 
     @GetMapping("/getAll/{id}")
     public ResponseEntity<List<Reserva>> obtenerReservasUsuario(@PathVariable Integer id) {
-        return ResponseEntity.ok(reservaService.obtenerReservaPorUsuario(id));
+        List<Reserva> listaReservas = reservaService.obtenerReservaPorUsuario(id);
+        System.out.println("************************************");
+        System.out.println(listaReservas);
+        return ResponseEntity.ok(listaReservas);
     }
 
     @GetMapping("/activas/{id}")

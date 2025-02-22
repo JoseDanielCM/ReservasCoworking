@@ -1,6 +1,9 @@
 package com.SpringBootTest.Entity;
 
 import com.SpringBootTest.DTO.Estado;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.sql.Time;
@@ -83,14 +86,6 @@ public class Reserva {
         this.estado = estado;
     }
 
-    @Override
-    public String toString() {
-        return "Reserva{" +
-                "id=" + id +
-                ", espacio=" + espacio +
-                ", usuario=" + usuario +
-                ", horario=" + horario +
-                ", estado=" + estado +
-                '}';
-    }
+
+
 }
